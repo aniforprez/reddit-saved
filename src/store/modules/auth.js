@@ -1,5 +1,7 @@
 import snoowrap from 'snoowrap';
 
+import config from '../../config';
+
 const state = {
 	redirectUrl: null,
 	authToken: null,
@@ -29,9 +31,9 @@ const mutations = {
 const actions = {
 	setRedirectUrl({ commit }) {
 		const redirectUrl = snoowrap.getAuthUrl({
-			clientId: '8eNCCpBD9bNMzw',
-			scope: ['history', 'save', 'identity', 'vote'],
-			redirectUri: 'http://localhost:8080/token',
+			clientId: config.clientId,
+			scope: config.scope,
+			redirectUri: config.redirectUri,
 			permanent: false
 		});
 
@@ -41,9 +43,9 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			snoowrap.fromAuthCode({
 				code,
-				clientId: '8eNCCpBD9bNMzw',
-				clientSecret: 'kAYQNcjwjmzJDyfs2bFk8DBCwXY',
-				redirectUri: 'http://localhost:8080/token'
+				clientId: config.clientId,
+				clientSecret: config.clientSecret,
+				redirectUri: config.redirectUri
 			}).then(instance => {
 				const authToken = instance.accessToken;
 
