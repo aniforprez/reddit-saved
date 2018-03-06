@@ -2,7 +2,8 @@ import snoowrap from 'snoowrap';
 
 const state = {
 	redirectUrl: null,
-	authToken: null
+	authToken: null,
+	authError: false
 };
 
 const getters = {
@@ -17,14 +18,16 @@ const mutations = {
 	},
 	authSuccess(state, { authToken }) {
 		state.authToken = authToken;
+		state.authError = false;
 	},
 	authFailure(state) {
 		state.authToken = null;
+		state.authError = true;
 	}
 };
 
 const actions = {
-	setRedirectUrl({ state, commit }) {
+	setRedirectUrl({ commit }) {
 		const redirectUrl = snoowrap.getAuthUrl({
 			clientId: '8eNCCpBD9bNMzw',
 			scope: ['history', 'save', 'identity', 'vote'],
@@ -34,7 +37,7 @@ const actions = {
 
 		commit('setRedirectUrl', { redirectUrl });
 	},
-	authorize({ commit, state }, code) {
+	authorize({ commit }, code) {
 		return new Promise((resolve, reject) => {
 			snoowrap.fromAuthCode({
 				code,
@@ -43,6 +46,7 @@ const actions = {
 				redirectUri: 'http://localhost:8080/token'
 			}).then(instance => {
 				const authToken = instance.accessToken;
+
 				commit('authSuccess', { authToken });
 				resolve();
 			}).catch(error => {

@@ -5,6 +5,11 @@
 			<el-row type="flex" class="row-bg" justify="center">
 				<div class="main-demo">
 					<a :href="redirectUrl" v-if="!authorized">Authorize app</a>
+					<ul v-if="authorized">
+						<li v-for="(savedItem, index) in savedList" :key="savedItem.id">
+							{{ index }}: {{ savedItem.id }}, {{ savedItem.title }}
+						</li>
+					</ul>
 				</div>
 			</el-row>
 		</el-main>
@@ -23,7 +28,8 @@ export default {
 	computed: {
 		...mapGetters([
 			'redirectUrl',
-			'authorized'
+			'authorized',
+			'savedList'
 		])
 	},
 	created() {
