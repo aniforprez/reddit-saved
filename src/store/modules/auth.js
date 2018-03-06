@@ -39,6 +39,17 @@ const actions = {
 
 		commit('setRedirectUrl', { redirectUrl });
 	},
+	checkAlreadyAuthorized({ state, commit }) {
+		const authToken = localStorage.getItem('authToken');
+		const authTime = localStorage.getItem('authTime');
+
+		if(Date.now() - authTime < 24 * 60 * 1000) {
+			commit('authSuccess', { authToken });
+		} else {
+			localStorage.removeItem('authToken');
+			localStorage.removeItem('authTime');
+		}
+	},
 	authorize({ commit }, code) {
 		return new Promise((resolve, reject) => {
 			snoowrap.fromAuthCode({
@@ -48,6 +59,8 @@ const actions = {
 				redirectUri: config.redirectUri
 			}).then(instance => {
 				const authToken = instance.accessToken;
+				localStorage.setItem('authToken', authToken);
+				localStorage.setItem('authTime', Date.now());
 
 				commit('authSuccess', { authToken });
 				resolve();

@@ -7,8 +7,9 @@
 <script>
 export default {
 	name: 'app',
-	created() {
+	beforeCreate() {
 		this.$store.dispatch('setRedirectUrl');
+		this.$store.dispatch('checkAlreadyAuthorized');
 	}
 };
 </script>
