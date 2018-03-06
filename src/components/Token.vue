@@ -1,8 +1,5 @@
 <template>
-	<div>
-		<p>Token</p>
-		<router-link to="/">Main</router-link>
-	</div>
+
 </template>
 
 <script>
@@ -10,9 +7,9 @@ export default {
 	name: 'Token',
 	data() {
 		return {};
+	},
+	created() {
+		this.$store.dispatch('authorize', this.$route.query.code).then(() => { this.$router.push('/'); });
 	}
 };
 </script>
-
-<style scoped>
-</style>
