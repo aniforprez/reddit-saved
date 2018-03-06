@@ -27,7 +27,7 @@ const actions = {
 	setRedirectUrl({ state, commit }) {
 		const redirectUrl = snoowrap.getAuthUrl({
 			clientId: '8eNCCpBD9bNMzw',
-			scope: ['history', 'save'],
+			scope: ['history', 'save', 'identity', 'vote'],
 			redirectUri: 'http://localhost:8080/token',
 			permanent: false
 		});
