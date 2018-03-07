@@ -1,40 +1,40 @@
 import snoowrap from 'snoowrap';
 
 const state = {
-	errorLoadingSaved: false,
-	loadingSaved: false,
-	savedList: null
+	errorLoadingHidden: false,
+	loadingHidden: false,
+	hiddenList: null
 };
 
 const getters = {
-	savedList: state => state.savedList
+	hiddenList: state => state.hiddenList
 };
 
 const mutations = {
-	loadingSaved(state) {
-		state.loadingSaved = true;
+	loadingHidden(state) {
+		state.loadingHidden = true;
 	},
-	successFetchingSavedList(state, { savedList }) {
-		state.savedList = savedList;
-		state.loadingSaved = false;
-		state.errorLoadingSaved = false;
+	successFetchingHiddenList(state, { hiddenList }) {
+		state.hiddenList = hiddenList;
+		state.loadingHidden = false;
+		state.errorLoadingHidden = false;
 	},
-	failureFetchingSavedList(state) {
-		state.savedList = null;
-		state.loadingSaved = false;
-		state.errorLoadingSaved = true;
+	failureFetchingHiddenList(state) {
+		state.hiddenList = null;
+		state.loadingHidden = false;
+		state.errorLoadingHidden = true;
 	}
 };
 
 const actions = {
-	getSavedListFromReddit({ commit, rootState }) {
+	getHiddenListFromReddit({ commit, rootState }) {
 		return new Promise((resolve, reject) => {
-			commit('loadingSaved');
+			commit('loadingHidden');
 
 			let r = new snoowrap({ accessToken: rootState.auth.authToken });
-			r.getMe().getSavedContent().fetchAll().then(savedListing => {
-				let savedListingJSON = savedListing.toJSON();
-				let savedList = savedListingJSON.map(listItem => {
+			r.getMe().getHiddenContent().fetchAll().then(hiddenListing => {
+				let hiddenListingJSON = hiddenListing.toJSON();
+				let hiddenList = hiddenListingJSON.map(listItem => {
 					return {
 						id: listItem.name,
 						title: listItem.title || listItem.link_title,
@@ -64,11 +64,11 @@ const actions = {
 					};
 				});
 
-				commit('successFetchingSavedList', { savedList });
+				commit('successFetchingHiddenList', { hiddenList });
 				resolve();
 			}).catch(error => {
 				if(error) {
-					commit('failureFetchingSavedList');
+					commit('failureFetchingHiddenList');
 					reject(error);
 				}
 			});

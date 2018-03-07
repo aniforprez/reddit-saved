@@ -1,6 +1,16 @@
 <template>
 	<div id="app">
-		<router-view/>
+		<el-container>
+			<el-header>Main</el-header>
+			<el-main>
+				<el-row type="flex" class="row-bg" justify="center">
+					<div class="main-content">
+						<router-view/>
+					</div>
+				</el-row>
+			</el-main>
+			<el-footer>Footer</el-footer>
+		</el-container>
 	</div>
 </template>
 
@@ -21,5 +31,9 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
+}
+
+.main-content {
+	max-width: 900px;
 }
 </style>

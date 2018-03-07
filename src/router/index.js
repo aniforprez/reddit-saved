@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Main from '../components/Main';
+import SavedPage from '../components/SavedPage';
+import HiddenPage from '../components/HiddenPage';
 import Token from '../components/Token';
 
 Vue.use(Router);
@@ -11,8 +12,13 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'Main',
-			component: Main
+			name: 'SavedPage',
+			component: SavedPage
+		},
+		{
+			path: '/hidden',
+			name: 'HiddenPage',
+			component: HiddenPage
 		},
 		{
 			path: '/token',

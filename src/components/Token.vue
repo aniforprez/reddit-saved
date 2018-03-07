@@ -1,7 +1,3 @@
-<template>
-
-</template>
-
 <script>
 export default {
 	name: 'Token',
@@ -9,7 +5,11 @@ export default {
 		return {};
 	},
 	created() {
+		console.log(this.$route.query);
 		this.$store.dispatch('authorize', this.$route.query.code).then(() => { this.$router.push('/'); });
+	},
+	render() {
+		return ``;
 	}
 };
 </script>
