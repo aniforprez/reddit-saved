@@ -2,7 +2,7 @@
 	<div id="hidden-page">
 		<a :href="redirectUrl" v-if="!authorized">Authorize app</a>
 		<router-link to="/" v-if="authorized">Saved</router-link>
-		<ContentList v-if="authorized" :content-list="hiddenList"></ContentList>
+		<ContentList v-if="authorized" :content-list="hiddenList" />
 	</div>
 </template>
 
