@@ -29,6 +29,8 @@ module.exports = {
     "no-tabs": 0,
     // Exception for snoowrap cause otherwise it's irritating
     "new-cap": ["error", {"newIsCapExceptions": ["snoowrap"]}],
+    // Console commands are warnings
+    "no-console": ["warn"],
 
     // allow async-await
     'generator-star-spacing': ["error", {"before": true, "after": false}],

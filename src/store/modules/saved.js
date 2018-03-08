@@ -36,7 +36,8 @@ const actions = {
 				let savedListingJSON = savedListing.toJSON();
 				let savedList = savedListingJSON.map(listItem => {
 					return {
-						id: listItem.name,
+						id: listItem.id,
+						name: listItem.name,
 						title: listItem.title || listItem.link_title,
 						url: listItem.url,
 						subreddit: listItem.subreddit_name_prefixed,

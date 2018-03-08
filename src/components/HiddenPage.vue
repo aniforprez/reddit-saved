@@ -1,22 +1,23 @@
 <template>
 	<div id="hidden-page">
 		<a :href="redirectUrl" v-if="!authorized">Authorize app</a>
-		<router-link to="/">Saved</router-link>
-		<ul v-if="authorized">
-			<li v-for="(hiddenItem, index) in hiddenList" :key="hiddenItem.id">
-				{{ index }}: {{ hiddenItem.id }}, {{ hiddenItem.title }}
-			</li>
-		</ul>
+		<router-link to="/" v-if="authorized">Saved</router-link>
+		<ContentList v-if="authorized" :content-list="hiddenList"></ContentList>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
+import ContentList from './ContentList';
+
 export default {
 	name: 'Main',
 	data() {
 		return { };
+	},
+	components: {
+		ContentList
 	},
 	computed: {
 		...mapGetters([
