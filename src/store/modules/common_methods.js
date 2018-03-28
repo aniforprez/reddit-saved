@@ -37,4 +37,19 @@ function convertListingToList(contentListing) {
 	return list;
 }
 
-export { convertListingToList };
+function getUniqueSubreddits(contentList) {
+	const subreddits = contentList.reduce((subredditList, savedItem) => {
+		if(subredditList.indexOf(savedItem.subreddit) < 0) {
+			subredditList.push(savedItem.subreddit);
+		}
+
+		return subredditList;
+	}, []);
+
+	return subreddits;
+}
+
+export {
+	convertListingToList,
+	getUniqueSubreddits
+};

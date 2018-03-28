@@ -1,6 +1,6 @@
 import snoowrap from 'snoowrap';
 
-import { convertListingToList } from './common_methods';
+import { convertListingToList, getUniqueSubreddits } from './common_methods';
 
 const state = {
 	errorLoadingSaved: false,
@@ -9,7 +9,16 @@ const state = {
 };
 
 const getters = {
-	savedList: state => state.savedList
+	savedList: state => state.savedList,
+	savedSubreddits: state => {
+		if(state.savedList) {
+			const subreddits = getUniqueSubreddits(state.savedList);
+
+			return subreddits;
+		} else {
+			return null;
+		}
+	}
 };
 
 const mutations = {
@@ -35,7 +44,6 @@ const actions = {
 
 			let r = new snoowrap({ accessToken: rootState.auth.authToken });
 			r.getMe().getSavedContent().fetchAll().then(savedListing => {
-				// let savedListingJSON = savedListing.toJSON();
 				let savedList = convertListingToList(savedListing);
 
 				commit('successFetchingSavedList', { savedList });

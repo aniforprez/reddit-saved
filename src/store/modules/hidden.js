@@ -1,6 +1,6 @@
 import snoowrap from 'snoowrap';
 
-import { convertListingToList } from './common_methods';
+import { convertListingToList, getUniqueSubreddits } from './common_methods';
 
 const state = {
 	errorLoadingHidden: false,
@@ -9,7 +9,16 @@ const state = {
 };
 
 const getters = {
-	hiddenList: state => state.hiddenList
+	hiddenList: state => state.hiddenList,
+	hiddenSubreddits: state => {
+		if(state.savedList) {
+			const subreddits = getUniqueSubreddits(state.savedList);
+
+			return subreddits;
+		} else {
+			return null;
+		}
+	}
 };
 
 const mutations = {
