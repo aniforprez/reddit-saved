@@ -1,6 +1,6 @@
 # reddit-saved
 
-> A project borne out of a desperate need to manage my personal content on reddit
+ A project borne out of a desperate need to manage my personal content on reddit
 
 ## Build Setup
 

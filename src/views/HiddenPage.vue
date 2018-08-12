@@ -9,7 +9,7 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import ContentList from './ContentList';
+import ContentList from '../components/ContentList';
 
 export default {
 	name: 'Main',

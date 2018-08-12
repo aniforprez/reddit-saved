@@ -1,22 +1,13 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module'
-  },
   env: {
-    browser: true,
+    node: true
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  'extends': [
+    'plugin:vue/essential',
+    '@vue/standard'
   ],
-  // add your custom rules here
-  'rules': {
+  rules: {
     // Override default space bullshit for tabs cause tabs are the best and fuck you
     "indent": ["error", "tab"],
     // No space after conditionals or loops because WHY
@@ -29,12 +20,15 @@ module.exports = {
     "no-tabs": 0,
     // Exception for snoowrap cause otherwise it's irritating
     "new-cap": ["error", {"newIsCapExceptions": ["snoowrap"]}],
-    // Console commands are warnings
-    "no-console": ["warn"],
-
     // allow async-await
     'generator-star-spacing': ["error", {"before": true, "after": false}],
+
+    // Console commands are warnings
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  },
+  parserOptions: {
+    parser: 'babel-eslint'
   }
 }

@@ -9,7 +9,7 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import ContentList from './ContentList';
+import ContentList from '../components/ContentList';
 
 export default {
 	name: 'SavedPage',
@@ -23,7 +23,8 @@ export default {
 		...mapGetters([
 			'redirectUrl',
 			'authorized',
-			'savedList'
+			'savedList',
+			'numberOfSaved'
 		])
 	},
 	created() {
