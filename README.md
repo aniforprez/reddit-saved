@@ -2,27 +2,51 @@
 
  A project borne out of a desperate need to manage my personal content on reddit
 
-## Build Setup
+## Project setup
 
-``` bash
-# install dependencies
+```bash
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
+
+### Compiles and hot-reloads for development
+
+```bash
+npm run serve
+```
+
+### Run Storybook for development
+
+```bash
+npm run serve:storybook
+```
+
+### Compiles and minifies for production
+
+```bash
+npm run build
+```
+
+### Build Storybook for production
+
+```bash
+npm run build:storybook
+```
+
+### Lints and fixes files
+
+```bash
+npm run lint
+```
+
+### Run your unit tests
+
+```bash
+npm run test:unit
+```
+
+### Run your end-to-end tests
+
+```bash
+npm run test:e2e
+```
+
