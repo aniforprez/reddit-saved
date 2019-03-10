@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import SavedPage from '../views/SavedPage';
-import HiddenPage from '../views/HiddenPage';
-import Token from '../views/Token';
+import SavedPage from '@/views/SavedPage';
+import HiddenPage from '@/views/HiddenPage';
+import Token from '@/views/Token';
 
 Vue.use(Router);
 

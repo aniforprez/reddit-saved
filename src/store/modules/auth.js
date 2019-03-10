@@ -1,6 +1,6 @@
 import snoowrap from 'snoowrap';
 
-import config from '../../config';
+import config from '@/config';
 
 const state = {
 	redirectUrl: null,

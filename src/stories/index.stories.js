@@ -28,6 +28,7 @@ storiesOf('ContentItem', module)
 storiesOf('ContentList', module)
 	.add('List of items', () => ({
 		components: { ContentList },
+		template: '<ContentList :content-list="savedList">',
 		data() {
 			return {
 				savedList: [{
@@ -38,6 +39,5 @@ storiesOf('ContentList', module)
 					title: 'Something else'
 				}]
 			};
-		},
-		template: '<ContentList :content-list="savedList">'
+		}
 	}));
