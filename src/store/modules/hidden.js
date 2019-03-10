@@ -5,11 +5,14 @@ import { convertListingToList, getUniqueSubreddits } from './common_methods';
 const state = {
 	errorLoadingHidden: false,
 	loadingHidden: false,
-	hiddenList: null
+	loadedHidden: false,
+	hiddenList: []
 };
 
 const getters = {
+	loadedHidden: state => state.loadedHidden,
 	hiddenList: state => state.hiddenList,
+	hiddenCount: state => state.hiddenList.length,
 	hiddenSubreddits: state => {
 		if(state.savedList) {
 			const subreddits = getUniqueSubreddits(state.savedList);
@@ -28,17 +31,19 @@ const mutations = {
 	successFetchingHiddenList(state, { hiddenList }) {
 		state.hiddenList = hiddenList;
 		state.loadingHidden = false;
+		state.loadedHidden = true;
 		state.errorLoadingHidden = false;
 	},
 	failureFetchingHiddenList(state) {
-		state.hiddenList = null;
+		state.hiddenList = [];
 		state.loadingHidden = false;
 		state.errorLoadingHidden = true;
 	}
 };
 
 const actions = {
-	getHiddenListFromReddit({ commit, rootState }) {
+	loadHiddenList({ commit, rootState }) {
+		console.info('Loading Hidden');
 		return new Promise((resolve, reject) => {
 			commit('loadingHidden');
 

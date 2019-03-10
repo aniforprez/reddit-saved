@@ -23,14 +23,14 @@ export default {
 		...mapGetters([
 			'redirectUrl',
 			'authorized',
-			'hiddenList'
+			'loadedHidden',
+			'hiddenList',
+			'hiddenCount'
 		])
 	},
 	created() {
-		if(this.authorized) {
-			if(!this.hiddenList) {
-				this.$store.dispatch('getHiddenListFromReddit');
-			}
+		if(this.authorized && !this.loadedHidden) {
+			this.$store.dispatch('loadHiddenList');
 		}
 	}
 };

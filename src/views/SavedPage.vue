@@ -1,7 +1,7 @@
 <template>
 	<div id="saved-page">
 		<a :href="redirectUrl" v-if="!authorized">Authorize app</a>
-		<router-link to="/hidden" v-if="authorized">Hidden</router-link>
+		<!-- <router-link to="/hidden" v-if="authorized">Hidden</router-link> -->
 		<div>
 			<input type="checkbox" v-model="filterNSFWCheck"> NSFW
 			<select v-model="filterSubreddits" multiple>
