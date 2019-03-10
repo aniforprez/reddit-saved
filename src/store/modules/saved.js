@@ -64,6 +64,12 @@ const mutations = {
 			state.savedList[index].likes = null;
 			state.savedList[index].score += 1;
 		}
+	},
+	setSavedPost(state, { index, saved }) {
+		state.savedList[index].saved = saved;
+	},
+	setHiddenPost(state, { index, hidden }) {
+		state.savedList[index].saved = hidden;
 	}
 };
 
@@ -86,6 +92,7 @@ const actions = {
 				}
 			});
 		});
+	},
 	votePost({ commit, state, rootState }, { index, postId, action }) {
 		let r = new snoowrap({ accessToken: rootState.auth.authToken });
 
@@ -112,6 +119,43 @@ const actions = {
 			});
 		});
 	},
+	toggleSavePost({ commit, state, rootState }, { index, postId }) {
+		let r = new snoowrap({ accessToken: rootState.auth.authToken });
+
+		return new Promise((resolve, reject) => {
+			let savePromise = null;
+			if(state.savedList[index].saved) {
+				savePromise = r.getSubmission(postId).unsave();
+			} else {
+				savePromise = r.getSubmission(postId).save();
+			}
+
+			savePromise.then(() => {
+				commit('setSavedPost', { index, saved: !state.savedList[index].saved });
+				resolve();
+			}).catch(error => {
+				reject(error);
+			});
+		});
+	},
+	toggleHidePost({ commit, state, rootState }, { index, postId }) {
+		let r = new snoowrap({ accessToken: rootState.auth.authToken });
+
+		return new Promise((resolve, reject) => {
+			let hidePromise = null;
+			if(state.savedList[index].hidden) {
+				hidePromise = r.getSubmission(postId).unhide();
+			} else {
+				hidePromise = r.getSubmission(postId).hide();
+			}
+
+			hidePromise.then(() => {
+				commit('setHiddenPost', { index, hidden: !state.savedList[index].hidden });
+				resolve();
+			}).catch(error => {
+				reject(error);
+			});
+		});
 	}
 };
 

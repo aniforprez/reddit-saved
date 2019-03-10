@@ -7,7 +7,7 @@ import ContentList from '../components/ContentList.vue';
 storiesOf('ContentItem', module)
 	.add('ContentItem for a single item', () => ({
 		components: { ContentItem },
-		template: '<ContentItem :index="index" :content="content" />',
+		template: '<ContentItem :index="index" :content="content" @upvoted="upvoted" @downvoted="downvoted" @toggleSave="toggleSave" @toggleHide="toggleHide" />',
 		data() {
 			return {
 				index: 1,
@@ -18,7 +18,10 @@ storiesOf('ContentItem', module)
 			};
 		},
 		methods: {
-			action: action('clicked')
+			upvoted: action('upvoted'),
+			downvoted: action('downvoted'),
+			toggleSave: action('toggleSave'),
+			toggleHide: action('toggleHide')
 		}
 	}));
 
