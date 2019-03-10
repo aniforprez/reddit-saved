@@ -23,15 +23,13 @@ export default {
 		...mapGetters([
 			'redirectUrl',
 			'authorized',
-			'savedList',
+			'loadedSaved',
 			'numberOfSaved'
-		])
+			'savedCount',
 	},
 	created() {
-		if(this.authorized) {
-			if(!this.savedList) {
-				this.$store.dispatch('getSavedListFromReddit');
-			}
+		if(this.authorized && !this.loadedSaved) {
+			this.$store.dispatch('loadSavedList');
 		}
 	}
 };

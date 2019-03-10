@@ -43,7 +43,7 @@ const actions = {
 		const authToken = localStorage.getItem('authToken');
 		const authTime = localStorage.getItem('authTime');
 
-		if(Date.now() - authTime < 24 * 60 * 1000) {
+		if(Date.now() - authTime < 60 * 60 * 1000) {
 			commit('authSuccess', { authToken });
 		} else {
 			localStorage.removeItem('authToken');

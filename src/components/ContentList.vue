@@ -1,6 +1,8 @@
 <template>
 	<ul>
-		<ContentItem v-for="(contentItem, index) in contentList" :key="contentItem.id" :content="contentItem" :index="index" />
+		<li v-for="(content, index) in contentList" :key="content.id">
+			<ContentItem :content="content" :index="index" />
+		</li>
 	</ul>
 </template>
 

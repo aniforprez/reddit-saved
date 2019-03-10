@@ -38,15 +38,13 @@ function convertListingToList(contentListing) {
 }
 
 function getUniqueSubreddits(contentList) {
-	const subreddits = contentList.reduce((subredditList, savedItem) => {
+	return contentList.reduce((subredditList, savedItem) => {
 		if(subredditList.indexOf(savedItem.subreddit) < 0) {
 			subredditList.push(savedItem.subreddit);
 		}
 
 		return subredditList;
-	}, []);
-
-	return subreddits;
+	}, []).sort();
 }
 
 export {
