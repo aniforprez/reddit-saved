@@ -3,6 +3,10 @@ import snoowrap from 'snoowrap';
 import { convertListingToList, getUniqueSubreddits } from './common_methods';
 
 const state = {
+	filter: {
+		nsfw: null,
+		subreddits: []
+	},
 	errorLoadingSaved: false,
 	loadingSaved: false,
 	loadedSaved: false,
@@ -10,9 +14,20 @@ const state = {
 };
 
 const getters = {
-	savedList: state => state.savedList,
+	filter: state => state.filter,
 	loadedSaved: state => state.loadedSaved,
 	savedCount: state => state.savedList.length,
+	filteredSavedList: state => {
+		return state.savedList.filter(savedItem => {
+			if(state.filter.nsfw) {
+				return savedItem.nsfw;
+			}
+			if(state.filter.subreddits.length > 0) {
+				return state.filter.subreddits.indexOf(savedItem.subreddit) > -1;
+			}
+			return true;
+		});
+	},
 	savedSubreddits: state => {
 		if(state.loadedSaved) {
 			return getUniqueSubreddits(state.savedList);
@@ -70,6 +85,12 @@ const mutations = {
 	},
 	setHiddenPost(state, { index, hidden }) {
 		state.savedList[index].saved = hidden;
+	},
+	setFilterNSFW(state, nsfw) {
+		state.filter.nsfw = nsfw;
+	},
+	setFilterSubreddits(state, subreddits) {
+		state.filter.subreddits = subreddits;
 	}
 };
 
