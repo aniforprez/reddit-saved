@@ -1,5 +1,8 @@
 # reddit-saved
 
+> ### Moved to Gitlab
+> This project is moved to [Gitlab](https://gitlab.com/aniforprez/reddit-saved) cause I like Gitlab more
+
  A project borne out of a desperate need to manage my personal content on reddit
 
 ## Project setup
